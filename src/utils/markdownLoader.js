@@ -28,7 +28,7 @@ export const loadMarkdownPosts = async () => {
     for (const filename of markdownFiles) {
       try {
         console.log('📄 Fetching file:', filename)
-        const response = await fetch(`/content/posts/${filename}`)
+        const response = await fetch(`${import.meta.env.BASE_URL}content/posts/${filename}`)
         
         if (!response.ok) {
           console.warn(`⚠️ Failed to load ${filename}:`, response.status)
