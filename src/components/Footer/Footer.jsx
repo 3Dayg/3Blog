@@ -16,11 +16,22 @@ const Footer = () => {
           
           <div className={styles.links}>
             <div className={styles.linkSection}>
-              <h4>Connect</h4>
-              <a href="https://github.com/3Dayg" target="_blank" rel="noopener noreferrer">
+              <a 
+                href="https://github.com/3Dayg" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Visit my GitHub profile"
+                className={styles.externalLink}
+              >
                 GitHub
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <a 
+                href="https://www.linkedin.com/in/alvarez-matias-n/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Connect with me on LinkedIn"
+                className={styles.externalLink}
+              >
                 LinkedIn
               </a>
             </div>

@@ -1,9 +1,55 @@
 import { useParams, Link } from '@tanstack/react-router'
 import PostRenderer from '../../components/PostRenderer/PostRenderer'
+import { usePostsContext } from '../../hooks/usePostsContext'
 import styles from './Post.module.css'
 
-const Post = ({ posts = [] }) => {
-  const { slug } = useParams()
+const Post = () => {
+  const { posts, loading, error } = usePostsContext()
+  const params = useParams({ from: '/post/$slug' })
+  const slug = params.slug
+  
+  console.log('📄 Post component - slug:', slug)
+  console.log('📄 Post component - posts available:', posts.length)
+  
+  // Show loading state
+  if (loading) {
+    return (
+      <div className={styles.post}>
+        <div className={styles.container}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            height: '50vh',
+            fontSize: '1.2rem',
+            color: '#6b7280'
+          }}>
+            Loading post...
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className={styles.post}>
+        <div className={styles.container}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            height: '50vh',
+            fontSize: '1.2rem',
+            color: '#dc2626'
+          }}>
+            Error loading posts: {error}
+          </div>
+        </div>
+      </div>
+    )
+  }
   
   // Find the post by slug
   const post = posts.find(p => p.slug === slug)

@@ -130,6 +130,44 @@
   font-size: 1.125rem;
 }
 
+/* Loading States */
+.loadingMore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+  color: #6b7280;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadMoreIndicator {
+  text-align: center;
+  padding: 2rem;
+  margin: 1rem 0;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+  color: #6b7280;
+  font-style: italic;
+  border: 2px dashed #d1d5db;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {

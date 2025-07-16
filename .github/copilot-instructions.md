@@ -7,6 +7,7 @@
 - Always suggest the most current and recommended React patterns
 - Be opinionated about best practices but explain the reasoning
 - Never dive into coding ask for confirmation and request any additional information needed to provide the best solution
+- Never introduce additional dependencies unless absolutely necessary, also remember to check first if the functionality can be achieved with existing libraries or native JavaScript features
 
 ## Project Context
 - Simple React app with minimal domains

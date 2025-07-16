@@ -3,62 +3,29 @@ import {
   Route,
   RootRoute,
   RouterProvider,
-  Outlet,
-  Link
+  Outlet
 } from '@tanstack/react-router'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Home from './pages/Home/Home'
 import Post from './pages/Post/Post'
-import { usePosts } from './hooks/usePosts'
+import { PostsProvider } from './contexts/PostsContext'
 import './App.css'
 
-// Root component that provides posts data
+// Root component that provides the layout
 function RootComponent() {
-  const { posts, loading, error } = usePosts()
-
-  if (loading) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        fontSize: '1.2rem',
-        color: '#6b7280'
-      }}>
-        Loading posts...
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        fontSize: '1.2rem',
-        color: '#dc2626'
-      }}>
-        Error loading posts: {error}
-      </div>
-    )
-  }
-
   return (
     <div className="app">
       <Navbar />
       <main className="main-content">
-        <Outlet context={{ posts }} />
+        <Outlet />
       </main>
       <Footer />
     </div>
   )
 }
 
-// Create the root route
+// Create the root route OUTSIDE of components
 const rootRoute = new RootRoute({
   component: RootComponent
 })
@@ -68,8 +35,8 @@ const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/',
   component: function IndexComponent() {
-    const context = rootRoute.useRouteContext()
-    return <Home posts={context.posts} />
+    console.log('🏡 Home route - rendering')
+    return <Home />
   }
 })
 
@@ -78,17 +45,24 @@ const postRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/post/$slug',
   component: function PostComponent() {
-    const context = rootRoute.useRouteContext()
-    return <Post posts={context.posts} />
+    console.log('📄 Post route - rendering')
+    return <Post />
   }
 })
 
-// Create the router
+// Create the router tree OUTSIDE of components
 const routeTree = rootRoute.addChildren([indexRoute, postRoute])
+
+// Create the router instance OUTSIDE of components
 const router = new Router({ routeTree })
 
+// Main App component
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <PostsProvider>
+      <RouterProvider router={router} />
+    </PostsProvider>
+  )
 }
 
 export default App
