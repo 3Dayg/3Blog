@@ -54,7 +54,10 @@ const postRoute = new Route({
 const routeTree = rootRoute.addChildren([indexRoute, postRoute])
 
 // Create the router instance OUTSIDE of components
-const router = new Router({ routeTree })
+const router = new Router({ 
+  routeTree,
+  basepath: import.meta.env.BASE_URL
+})
 
 // Main App component
 function App() {
